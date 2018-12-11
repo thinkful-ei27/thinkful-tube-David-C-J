@@ -1,11 +1,10 @@
 const API_KEY = 'AIzaSyAmNXahEM--I1pk9lk13Y-2jhT1wZTHN9I';
-//const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/videos?id='+ '100' +'&key='+ 'AIzaSyAmNXahEM--I1pk9lk13Y-2jhT1wZTHN9I'
 STORE = {
   videos: [],
 
 }
 const BASE_URL = 'https://www.googleapis.com/youtube/v3/search'
-function getDataFromApi(searchTerm, callback) {
+/*function getDataFromApi(searchTerm, callback) {
     const query = {
       q: `${searchTerm} in:name`,
       per_page: 5
@@ -13,14 +12,23 @@ function getDataFromApi(searchTerm, callback) {
     $.getJSON(YOUTUBE_SEARCH_URL, query, callback);
   }
 getDataFromApi('abc', callback => console.log(callback));
-  
+  */
 
  STORE = {
      videos: [],
 
  }
-function fetchVideos(searchTerm, callback) {
+function fetchVideos(searchTerm) {
   // 1. Use `searchTerm` to construct the right query object based on the Youtube API docs
+  const query = {
+    id: searchTerm,
+    part: 'snippet', 
+    key: API_KEY,
+    q: `${searchTerm}`
+  };
+  $.getJSON(BASE_URL, query, callback =>{
+    console.log('callback');
+  } )
 //    - Refer to curriculum assignment for help with the required parameters
 // 2. Make a getJSON call using the query object and sending the provided callback in 
 //    as the last argument
@@ -58,7 +66,7 @@ function handleFormSubmet() {
 }
 
 function main() {
-
+  fetchVideos('cool');
 }
 $(main);
 // function that's going to generate html from data
